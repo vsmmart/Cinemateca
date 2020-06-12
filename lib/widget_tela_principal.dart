@@ -323,6 +323,10 @@ class FilmeCard extends StatelessWidget {
                   height: 120,
                   width: 120,
                 )
+              else if (this.filme.poster == 'N/A')
+                Icon( Icons.block, size: 120, color: Colors.grey[200],
+                  
+                ),
             ],
           ),
           Column(
@@ -379,7 +383,7 @@ Future<List<Filme>> procuraFilmes(String text) async {
     if (dados['Response'] == "True") {
       var listaFilmes =
           (dados['Search'] as List).map((e) => Filme.fromJson(e)).toList();
-      print(listaFilmes[0].imdbID);
+    
       return listaFilmes;
     } else {
       throw Exception('Nenhum filme foi encontrado!');
@@ -405,9 +409,3 @@ Widget listagem(String texto) {
       });
 }
 
-// void detalharFilme(ListaFilmes obj){
-//   (BuildContext context){
-//   Navigator.pushNamed(context, '/tela_detalhes', arguments: obj);
-//   };
- 
-// }
