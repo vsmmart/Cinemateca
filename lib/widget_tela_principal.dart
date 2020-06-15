@@ -119,7 +119,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
 /////////
 
 
-Row(
+             Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   IconButton(
@@ -128,16 +128,21 @@ Row(
                       color: Colors.white60,
                       padding: EdgeInsets.symmetric(vertical: 20.0),
                       hoverColor: Colors.grey[600],
-                      tooltip: 'Visualizar e Editar Perfil',
+                      tooltip: 'Editar e Visualizar Perfil',
                       onPressed: () {
                         Navigator.pushNamed(context, '/tela_perfil');
                       }),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'Meu Perfil',
-                      textAlign: TextAlign.start,
-                      style: TextStyle(color: Colors.white70),
+                  GestureDetector(
+                    onTap:  () {
+                        Navigator.pushNamed(context, '/tela_perfil');},
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Meu Perfil',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(color: Colors.white70),
+                      
+                      ),
                     ),
                   ),
                 ],
@@ -165,17 +170,22 @@ Row(
                       onPressed: () {
                         sobreDev(context);
                       }),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'Sobre o desenvolvedor',
-                      textAlign: TextAlign.start,
-                      style: TextStyle(color: Colors.white70),
+                  GestureDetector(
+                    onTap:  () {
+                        sobreDev(context);},
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Sobre o desenvolvedor',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(color: Colors.white70),
+                      
+                      ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 20.0),
+            
 
 //////
 //Botão Sobre o App
@@ -194,12 +204,17 @@ Row(
                       onPressed: () {
                         Navigator.pushNamed(context, '/tela_sobre');
                       }),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'Sobre o aplicativo',
-                      textAlign: TextAlign.start,
-                      style: TextStyle(color: Colors.white70),
+                  GestureDetector(
+                    onTap:() {
+                        Navigator.pushNamed(context, '/tela_sobre');
+                      },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Sobre o aplicativo',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(color: Colors.white70),
+                      ),
                     ),
                   ),
                 ],
@@ -222,12 +237,17 @@ Row(
                       onPressed: () {
                         Navigator.pop(context);
                       }),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'Fechar',
-                      textAlign: TextAlign.start,
-                      style: TextStyle(color: Colors.white70),
+                  GestureDetector(
+                    onTap: () {
+                        Navigator.pop(context);
+                      },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Fechar',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(color: Colors.white70),
+                      ),
                     ),
                   ),
                 ],
