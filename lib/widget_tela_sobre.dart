@@ -7,7 +7,7 @@ class TelaSobre extends StatefulWidget {
 
 class _TelaSobreState extends State<TelaSobre> {
   TextEditingController ctrlTexto1 = TextEditingController();
-  String texto1 = 'Este aplicativo foi desenvolvido como projeto para a disciplina de Programação para Dispositivos Móveis';
+  String texto1 = 'Este aplicativo foi desenvolvido como projeto para a disciplina de Programação para Dispositivos Móveis ministrada pelo professor Rodrigo Plotze. Foi também o primeiro projeto em que o desenvolvedor teve contato com POO, API, front-end, requests, Git, Github, funções assíncronas, entre outras. Foi um desafio muito grande mas motivador para o aprimoramento de programação. O Tema para o aplicativo escolhido foi "Cinema" devido a uma grande paixão do desenvolvedor por este hobby.';
   
   @override
   Widget build(BuildContext context) {
