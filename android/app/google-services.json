@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "770665389421",
+    "firebase_url": "https://app-cinemateca.firebaseio.com",
+    "project_id": "app-cinemateca",
+    "storage_bucket": "app-cinemateca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770665389421:android:da1e41dba80d081ee60e64",
+        "android_client_info": {
+          "package_name": "com.example.cinemateca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "770665389421-k1g5o44ubm36mpp4ud575lhk7lcft790.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYU-hzn8jRwx1v8e5_U7ze0OmLR5d_8z4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "770665389421-k1g5o44ubm36mpp4ud575lhk7lcft790.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
