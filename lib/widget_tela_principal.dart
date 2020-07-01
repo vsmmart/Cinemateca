@@ -54,7 +54,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                       },
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        hintText: 'Pesquise um filme',
+                        hintText: 'Pesquise um filme (em Inglês)',
                         prefixIcon:
                             Icon(Icons.movie, 
                             color: Colors.black45),
@@ -355,8 +355,32 @@ class FilmeCard extends StatelessWidget {
               Text(this.filme.ano),
               Text(this.filme.tipo),
             ],
-          )
+          ),
+          SizedBox(width: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+          IconButton(
+            icon: Icon(Icons.star),
+            padding: EdgeInsets.all(8.0), 
+            tooltip: 'Marcar como favorito',
+            onPressed: null),
 
+
+          IconButton(
+            icon: Icon(Icons.thumb_up),
+            padding: EdgeInsets.all(8.0),
+            tooltip: 'Marcar como gostei',   
+            onPressed: null
+            ),
+
+          IconButton(
+            icon: Icon(Icons.thumb_down),
+            padding: EdgeInsets.all(8.0),
+            tooltip: 'Marcar como não gostei',   
+            onPressed: null
+            )
+          ],),
         ],
       ),
     );
