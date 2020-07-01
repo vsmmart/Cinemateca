@@ -34,6 +34,15 @@ class _TelaCadastroState extends State<TelaCadastro> {
                     prefixIcon: Icon(Icons.lock),
                     border: OutlineInputBorder(),
                     labelText: 'Senha'),),
+                SizedBox(height:20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    FlatButton(onPressed: null, child: Text('Cadastrar')),
+                    FlatButton(onPressed: null, child: Text('Sair')),
+                  ],
+                  
+                ),
 
               ],),
 
