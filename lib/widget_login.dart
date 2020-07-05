@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'model/Usuario.dart';
+
+
 class TelaLogin extends StatefulWidget {
   @override
   _TelaLoginState createState() => _TelaLoginState();
@@ -104,7 +107,7 @@ class _TelaLoginState extends State<TelaLogin> {
                           return;
                         }    
                           Navigator.pushNamed(context, '/tela_principal',
-                              arguments: Usuario(_login));                   
+                              arguments: Usuario('',_login,_password));                   
                       },
                     ),
 
@@ -125,7 +128,7 @@ class _TelaLoginState extends State<TelaLogin> {
   }
 }
 
-class Usuario {
+/*class Usuario {
   String username;
   String password;
 
@@ -140,4 +143,4 @@ class Usuario {
   set senhaSet(String senha) {
     password = senha;
   }
-}
+}*/

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widget_login.dart';
+import 'model/Usuario.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -22,7 +22,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
           backgroundColor: Colors.deepPurple[600],
           title: usr == null
               ? Text('Bem-vindo Aquele-Que-Não-Deve-Ser-Nomeado')
-              : Text('Bem-vindo ${usr.name}'),
+              : Text('Bem-vindo ${usr.username}'),
           actions: [
             IconButton(
               icon: Icon(Icons.cancel), 
