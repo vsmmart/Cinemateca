@@ -1,4 +1,7 @@
+import 'package:cinemateca/model/Usuario.dart';
 import 'package:flutter/material.dart';
+
+
 
 class TelaPerfil extends StatefulWidget {
   @override
@@ -6,22 +9,44 @@ class TelaPerfil extends StatefulWidget {
 }
 
 class _TelaPerfilState extends State<TelaPerfil> {
-String oi = 'oi';
+
+
+
 
   @override
   Widget build(BuildContext context) {
+    Usuario usr = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       appBar: AppBar(title: Text('Meu Perfil'),backgroundColor: Colors.deepPurple[600],),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20),
-        child: Center(
+        
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              RichText(
-                text:TextSpan(
-                  text:'Informações serão apresentadas aqui',
-                
-              ))
+              Text('Username'),
+              SizedBox(height: 5),
+              TextFormField(
+                initialValue: usr == null
+                ? 'O Escolhido'
+                : usr.username,
+              ),
+              SizedBox(height: 10),
+              Text('Senha'),
+              SizedBox(height: 5),
+              TextFormField(
+
+              ),
+              SizedBox(height:10),
+              Text('Filmes que gostei'),
+              SizedBox(height:5),
+              Container(),
+              SizedBox(height:10),
+              
+              Text('Filmes que não gostei'),
+              SizedBox(height:5),
+              Container(),
               
             
             
@@ -29,7 +54,7 @@ String oi = 'oi';
             ],),
           
         ),
-      ),
+      
     );
   }
 }

@@ -130,11 +130,11 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                       hoverColor: Colors.grey[600],
                       tooltip: 'Editar e Visualizar Perfil',
                       onPressed: () {
-                        Navigator.pushNamed(context, '/tela_perfil');
+                        Navigator.pushNamed(context, '/tela_perfil',arguments: usr);
                       }),
                   GestureDetector(
                     onTap:  () {
-                        Navigator.pushNamed(context, '/tela_perfil');},
+                        Navigator.pushNamed(context, '/tela_perfil', arguments: usr);},
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
