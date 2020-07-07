@@ -360,12 +360,7 @@ class FilmeCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-          IconButton(
-            icon: Icon(Icons.star),
-            padding: EdgeInsets.all(8.0), 
-            tooltip: 'Marcar como favorito',
-            onPressed: null),
-
+          
 
           IconButton(
             icon: Icon(Icons.thumb_up),
