@@ -11,6 +11,7 @@ class TelaCadastro extends StatefulWidget {
 
 class _TelaCadastroState extends State<TelaCadastro> {
 TextEditingController txtUsername = TextEditingController();
+TextEditingController txtPassword = TextEditingController();
 
   
   
@@ -33,6 +34,7 @@ TextEditingController txtUsername = TextEditingController();
                     ),
                 SizedBox(height:20),
                 TextFormField(
+                  controller: txtPassword,
                   obscureText: true,
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.lock),
@@ -45,12 +47,17 @@ TextEditingController txtUsername = TextEditingController();
                     FlatButton(
                      child: Text('Cadastrar'),
                      
-                     onPressed: (){
-                       checagem(txtUsername.text);
+                     onPressed: (){ setState(() {
+                       
+                       checagem(context, txtUsername.text, txtPassword.text);
+                      // popup(context, txtUsername.text,txtPassword.text);
+                       
+                     });
+                       
 
                      }),
                     
-                    FlatButton(onPressed: ()=> Navigator.pop(context),
+                    FlatButton(onPressed: ()=> Navigator.popAndPushNamed(context, '/tela_login'),
                      child: Text('Sair')),
                   ],
                   
@@ -65,41 +72,61 @@ TextEditingController txtUsername = TextEditingController();
   }
 }
 
-Future<Widget> checagem(String texto) async {
+Future<Widget> checagem(BuildContext context, String usrname, String senha) async {
   var db = Firestore.instance;
   var flag = '';
   final String colecao = 'usuarios';
-  return StreamBuilder<QuerySnapshot>(
-    stream: db.collection(colecao).snapshots(),
-    builder: (context, snapshot){
-       switch (snapshot.connectionState) {
-              case ConnectionState.none:
-              case ConnectionState.waiting:
-                return Center(child: CircularProgressIndicator());
-              default: 
-                List<DocumentSnapshot> docs = snapshot.data.documents;
-                docs.forEach((element) {
-                  if(element.data.containsValue(texto)){
-                    flag ='Nome de usuário já existente!';
-                    return(Text('Nome de usuário já existente!'));
-                  
-                  }
-                  else{
-                    db.collection(colecao).add({
-                      "username":element.data["username"],
-                      "password":element.data["password"]
+  
+  
+  final QuerySnapshot result =
+        await db.collection(colecao).where('username', isEqualTo: usrname).getDocuments();
+    final List < DocumentSnapshot > documents = result.documents;
+  
+  if(documents.isEmpty){
+    db.collection(colecao).add({
+                      "username":usrname,
+                      "password":senha
                     });
-                    flag = 'Usuário Cadastrado com Sucesso!';
-                    return (Text('Usuário Cadastrado com Sucesso!'));
-                  }
-                });
-               
-       }
-       return AlertDialog(
-         content: Text(flag),
-         actions: [
-           FlatButton(onPressed: (){Navigator.pop(context);}, child: Text('Ok'))
-         ],
-       );
-    });
+   flag = 'Usuário Cadastrado com Sucesso!';
+                
+  }
+  else
+     flag = 'Usuário já existente! Por Favor, escolher outro nome de usuário';   
+
+ 
+ return showDialog(
+   context: context ,
+   builder: (BuildContext context){
+    return AlertDialog(
+        content:Text(flag),
+        actions:[
+          FlatButton(onPressed:(){
+            Navigator.pop(context);
+          } , child: Text('sair'))
+        ]
+      );
+
+   }
+ );
+
+
 }
+
+
+ /*popup(BuildContext context, String username, String senha) async{ 
+  return await showDialog(
+    context: context,
+    builder: (BuildContext context){
+      return AlertDialog(
+        content:Text(checagem(username, senha).toString()),
+        actions:[
+          FlatButton(onPressed:(){
+            Navigator.pop(context);
+          } , child: Text('sair'))
+        ]
+      );
+    },
+    );
+}*/
+
+ 
