@@ -47,6 +47,13 @@ class _TelaPerfilState extends State<TelaPerfil> {
               Text('Filmes que não gostei'),
               SizedBox(height:5),
               Container(),
+              SizedBox(height: 25),
+              FlatButton(
+                color: Colors.deepPurple[600],
+                onPressed: (){
+                Navigator.pop(context);
+              } , child: Text('Sair',style: TextStyle(color:Colors.white),
+               ),),
               
             
             
