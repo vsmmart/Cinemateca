@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'model/Usuario.dart';
@@ -14,6 +15,7 @@ class _TelaLoginState extends State<TelaLogin> {
   var _login = "";
   var _password = "";
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+ 
   
 
   @override
@@ -94,8 +96,7 @@ class _TelaLoginState extends State<TelaLogin> {
                     SizedBox(height: 30),
 
 //Botão Enviar
-                    RaisedButton(
-                      
+                    RaisedButton(                      
                       color: Colors.deepPurple[600],
                       child: Text('Enviar', 
                         style: TextStyle(color: Colors.white),
@@ -105,9 +106,9 @@ class _TelaLoginState extends State<TelaLogin> {
 
                         if (!_formkey.currentState.validate()) { 
                           return;
-                        }    
-                          Navigator.pushNamed(context, '/tela_principal',
-                              arguments: Usuario('',_login,_password));                   
+                        }
+                        checaLogin(context, _login, _password);
+                                    
                       },
                     ),
 
@@ -127,6 +128,47 @@ class _TelaLoginState extends State<TelaLogin> {
         ));
   }
 }
+
+Future<Widget> checaLogin(BuildContext context, String username, String senha)async{
+  var db = Firestore.instance;
+  var flag = '';
+  final String colecao = 'usuarios';
+  final QuerySnapshot result =
+        await db.collection(colecao).where('username', isEqualTo: username).getDocuments();
+  final List < DocumentSnapshot > documents = result.documents;
+    if(documents.isNotEmpty){
+     
+
+      if(documents[0].data['password'] == senha){
+        Navigator.pushNamed(context, '/tela_principal',
+                              arguments: Usuario('',username,senha)); 
+
+      }
+      else flag = 'Senha Incorreta! Tente outra vez.';
+      
+    }
+    else flag = 'Usúario Não Encontrado! Para se cadastrar, clique no botão "Não é cadastrado"';
+  if(flag.isNotEmpty)
+  return showDialog(
+    context: context, 
+     builder: (BuildContext context){
+    return AlertDialog(
+        content:Text(flag),
+        actions:[
+          FlatButton(onPressed:(){
+            Navigator.pop(context);
+          } , child: Text('sair'))
+        ]
+      );
+      }
+  );
+  return Text('');
+
+    
+
+}
+
+
 
 /*class Usuario {
   String username;
