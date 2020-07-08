@@ -91,7 +91,7 @@ Future<Widget> checagem(BuildContext context, String usrname, String senha) asyn
                 
   }
   else
-     flag = 'Usuário já existente! Por Favor, escolher outro nome de usuário';   
+     flag = 'Usuário já existente! Por favor, escolha outro nome de usuário';   
 
  
  return showDialog(
@@ -112,21 +112,5 @@ Future<Widget> checagem(BuildContext context, String usrname, String senha) asyn
 
 }
 
-
- /*popup(BuildContext context, String username, String senha) async{ 
-  return await showDialog(
-    context: context,
-    builder: (BuildContext context){
-      return AlertDialog(
-        content:Text(checagem(username, senha).toString()),
-        actions:[
-          FlatButton(onPressed:(){
-            Navigator.pop(context);
-          } , child: Text('sair'))
-        ]
-      );
-    },
-    );
-}*/
 
  

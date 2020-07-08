@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'model/Usuario.dart';
 import 'dart:async';
@@ -366,7 +367,11 @@ class FilmeCard extends StatelessWidget {
             icon: Icon(Icons.thumb_up),
             padding: EdgeInsets.all(8.0),
             tooltip: 'Marcar como gostei',   
-            onPressed: null
+            onPressed: (){
+                curtir(filme);
+            
+             
+            }
             ),
 
           IconButton(
@@ -448,3 +453,26 @@ Widget listagem(String texto) {
       });
 }
 
+Future<Widget> curtir(Filme filme)async{
+  var db = Firestore.instance;
+  final String colecao = 'liked';
+  final QuerySnapshot result =
+        await db.collection(colecao).where('titulo', isEqualTo: filme.titulo).getDocuments();
+  final List < DocumentSnapshot > documents = result.documents;
+  if(documents.isEmpty){
+    db.collection(colecao).add({
+      "titulo":filme.titulo,
+      "poster":filme.poster,
+      "imdbID":filme.imdbID,
+    });
+  }
+  else{
+     var id = db.collection(colecao).document().documentID;
+     db.collection(colecao).document(id).delete();
+
+  }
+   
+
+
+
+}

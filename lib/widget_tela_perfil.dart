@@ -51,7 +51,7 @@ class _TelaPerfilState extends State<TelaPerfil> {
               FlatButton(
                 color: Colors.deepPurple[600],
                 onPressed: (){
-                Navigator.pop(context);
+                Navigator.popAndPushNamed(context, '/tela_principal');
               } , child: Text('Sair',style: TextStyle(color:Colors.white),
                ),),
               
