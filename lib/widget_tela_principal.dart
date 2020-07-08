@@ -331,6 +331,7 @@ class FilmeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Usuario usr = ModalRoute.of(context).settings.arguments;
     return Container(
       padding: EdgeInsets.all(20),
       child: Row(
@@ -364,21 +365,23 @@ class FilmeCard extends StatelessWidget {
           
 
           IconButton(
-            icon: Icon(Icons.thumb_up),
+            icon: Icon(Icons.thumb_up, color: Colors.cyan[400]),
             padding: EdgeInsets.all(8.0),
             tooltip: 'Marcar como gostei',   
             onPressed: (){
-                curtir(filme);
+                curtir(context,filme,usr);
             
              
             }
             ),
 
           IconButton(
-            icon: Icon(Icons.thumb_down),
+            icon: Icon(Icons.thumb_down, color: Colors.red[900]),
             padding: EdgeInsets.all(8.0),
             tooltip: 'Marcar como não gostei',   
-            onPressed: null
+            onPressed: (){
+              descurtir(context, filme, usr);
+            }
             )
           ],),
         ],
@@ -453,26 +456,105 @@ Widget listagem(String texto) {
       });
 }
 
-Future<Widget> curtir(Filme filme)async{
+Future<Widget> descurtir(BuildContext context, Filme filme, Usuario usuario)async{
   var db = Firestore.instance;
-  final String colecao = 'liked';
+  final String disliked = 'disliked';
   final QuerySnapshot result =
-        await db.collection(colecao).where('titulo', isEqualTo: filme.titulo).getDocuments();
+        await db.collection(disliked).where('imdbID', isEqualTo: filme.imdbID).getDocuments();
   final List < DocumentSnapshot > documents = result.documents;
+  final QuerySnapshot result2 =
+        await db.collection('usuarios').where('username', isEqualTo: usuario.username).getDocuments();
+  final List < DocumentSnapshot > docUsr = result2.documents;
+  
   if(documents.isEmpty){
-    db.collection(colecao).add({
+    db.collection(disliked).add({
       "titulo":filme.titulo,
       "poster":filme.poster,
       "imdbID":filme.imdbID,
+      "user": docUsr[0].documentID
     });
+    return showDialog(
+   context: context ,
+   builder: (BuildContext context){
+    return AlertDialog(
+        content:Text('${filme.titulo} foi adicionado com sucesso à sua lista de filmes que não gostou!'),
+        actions:[
+          FlatButton(onPressed:(){
+            Navigator.pop(context);
+          } , child: Text('sair'))
+        ]
+      );
+
+   }
+ );
   }
   else{
-     var id = db.collection(colecao).document().documentID;
-     db.collection(colecao).document(id).delete();
-
+    db.collection(disliked).document(documents.first.documentID).delete();
+    return showDialog(
+   context: context ,
+   builder: (BuildContext context){
+    return AlertDialog(
+        content:Text('${filme.titulo} foi removido da sua lista de filmes que não gostou!'),
+        actions:[
+          FlatButton(onPressed:(){
+            Navigator.pop(context);
+          } , child: Text('sair'))
+        ]
+      );
+     }
+    );
   }
-   
-
-
-
 }
+   
+Future<Widget> curtir(BuildContext context, Filme filme, Usuario usuario)async{
+  var db = Firestore.instance;
+  final String liked = 'liked';
+  final QuerySnapshot result =
+        await db.collection(liked).where('imdbID', isEqualTo: filme.imdbID).getDocuments();
+  final List < DocumentSnapshot > documents = result.documents;
+  final QuerySnapshot result2 =
+        await db.collection('usuarios').where('username', isEqualTo: usuario.username).getDocuments();
+  final List < DocumentSnapshot > docUsr = result2.documents;
+  
+  if(documents.isEmpty){
+    db.collection(liked).add({
+      "titulo":filme.titulo,
+      "poster":filme.poster,
+      "imdbID":filme.imdbID,
+      "user": docUsr[0].documentID
+    });
+    return showDialog(
+   context: context ,
+   builder: (BuildContext context){
+    return AlertDialog(
+        content:Text('${filme.titulo} foi adicionado com sucesso à sua lista de filmes que gostou!'),
+        actions:[
+          FlatButton(onPressed:(){
+            Navigator.pop(context);
+          } , child: Text('sair'))
+        ]
+      );
+
+   }
+ );
+  }
+  else{
+    db.collection(liked).document(documents.first.documentID).delete();
+    return showDialog(
+   context: context ,
+   builder: (BuildContext context){
+    return AlertDialog(
+        content:Text('${filme.titulo} foi removido da sua lista de filmes que gostou!'),
+        actions:[
+          FlatButton(onPressed:(){
+            Navigator.pop(context);
+          } , child: Text('sair'))
+        ]
+      );
+     }
+    );
+  }
+}
+
+
+
