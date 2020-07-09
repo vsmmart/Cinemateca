@@ -203,11 +203,11 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                       hoverColor: Colors.grey[600],
                       tooltip: 'Informações sobre o aplicativo',
                       onPressed: () {
-                        Navigator.pushNamed(context, '/tela_sobre');
+                        Navigator.pushNamed(context, '/tela_sobre',arguments: usr);
                       }),
                   GestureDetector(
                     onTap:() {
-                        Navigator.pushNamed(context, '/tela_sobre');
+                        Navigator.pushNamed(context, '/tela_sobre',arguments: usr);
                       },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -262,6 +262,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
 }
 
 sobreDev(BuildContext context) {
+  String sobre = 'Oi, eu sou o Dev do Cinemateca! Me chamo Vítor, tenho 27 anos e sou de aluno da Fatec - RP. Em 2019 comecei a cursar Análise e Desenvolvimento de Sistemas e tenho aprendido bastante. Esse app foi feito com muito carinho e esforço, espero que goste!';
   return showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -270,9 +271,9 @@ sobreDev(BuildContext context) {
           content: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                Text('Oi, eu sou o Dev!'),
-                SizedBox(height: 20.0),
-                GifAnimadoAsset()
+                Text(sobre, style: TextStyle(fontSize: 14, wordSpacing: 3),),
+                
+                
               ],
             ),
           ),
@@ -460,12 +461,23 @@ Widget listagem(String texto) {
 Future<Widget> descurtir(BuildContext context, Filme filme, Usuario usuario)async{
   var db = Firestore.instance;
   final String disliked = 'disliked';
+
   final QuerySnapshot result =
         await db.collection(disliked).where('imdbID', isEqualTo: filme.imdbID).getDocuments();
   final List < DocumentSnapshot > documents = result.documents;
+
   final QuerySnapshot result2 =
         await db.collection('usuarios').where('username', isEqualTo: usuario.username).getDocuments();
   final List < DocumentSnapshot > docUsr = result2.documents;
+
+  final QuerySnapshot result3 =
+        await db.collection('liked').where('imdbID', isEqualTo: filme.imdbID).getDocuments();
+  final List < DocumentSnapshot > docLiked = result3.documents;
+
+
+   if(docLiked.isNotEmpty){
+      db.collection('liked').document(docLiked.first.documentID).delete();
+  }
   
   if(documents.isEmpty){
     db.collection(disliked).add({
@@ -509,13 +521,24 @@ Future<Widget> descurtir(BuildContext context, Filme filme, Usuario usuario)asyn
    
 Future<Widget> curtir(BuildContext context, Filme filme, Usuario usuario)async{
   var db = Firestore.instance;
+
   final String liked = 'liked';
   final QuerySnapshot result =
         await db.collection(liked).where('imdbID', isEqualTo: filme.imdbID).getDocuments();
   final List < DocumentSnapshot > documents = result.documents;
+
   final QuerySnapshot result2 =
         await db.collection('usuarios').where('username', isEqualTo: usuario.username).getDocuments();
   final List < DocumentSnapshot > docUsr = result2.documents;
+
+  final QuerySnapshot result3 =
+        await db.collection('disliked').where('imdbID', isEqualTo: filme.imdbID).getDocuments();
+  final List < DocumentSnapshot > docDisliked = result3.documents;
+
+  if(docDisliked.isNotEmpty){
+      db.collection('disliked').document(docDisliked.first.documentID).delete();
+  }
+
   
   if(documents.isEmpty){
     db.collection(liked).add({

@@ -45,12 +45,13 @@ TextEditingController txtPassword = TextEditingController();
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     FlatButton(
-                     child: Text('Cadastrar'),
+                     child: Text('Cadastrar',style: TextStyle(color:Colors.white),),
+                     color: Colors.deepPurple[600],
                      
                      onPressed: (){ setState(() {
                        
                        checagem(context, txtUsername.text, txtPassword.text);
-                      // popup(context, txtUsername.text,txtPassword.text);
+                      
                        
                      });
                        
@@ -58,7 +59,9 @@ TextEditingController txtPassword = TextEditingController();
                      }),
                     
                     FlatButton(onPressed: ()=> Navigator.popAndPushNamed(context, '/tela_login'),
-                     child: Text('Sair')),
+                     child: Text('Sair'),
+                     color: Colors.grey[200],
+                     ),
                   ],
                   
                 ),
