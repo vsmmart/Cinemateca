@@ -20,19 +20,19 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
 
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.deepPurple[600],
-          title: usr == null
-              ? Text('Bem-vindo Aquele-Que-Não-Deve-Ser-Nomeado')
-              : Text('Bem-vindo ${usr.username}'),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.cancel), 
-              onPressed: (){
-                Navigator.pushNamedAndRemoveUntil(context, '/tela_login', (route) => false);
-              }           
-               ),
-            ],
-          ),
+        backgroundColor: Colors.deepPurple[600],
+        title: usr == null
+            ? Text('Bem-vindo Aquele-Que-Não-Deve-Ser-Nomeado')
+            : Text('Bem-vindo ${usr.username}'),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.cancel),
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/tela_login', (route) => false);
+              }),
+        ],
+      ),
       body: Container(
         padding: EdgeInsets.all(10),
         child: Column(
@@ -56,9 +56,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Pesquise um filme (em Inglês)',
-                        prefixIcon:
-                            Icon(Icons.movie, 
-                            color: Colors.black45),
+                        prefixIcon: Icon(Icons.movie, color: Colors.black45),
                       ),
                     ),
                   ),
@@ -89,8 +87,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                 ],
               ),
             ),
-            if (campoPesquisa.length > 0) 
-              listagem(campoPesquisa)
+            if (campoPesquisa.length > 0) listagem(campoPesquisa)
           ],
         ),
       ),
@@ -105,7 +102,11 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.deepPurpleAccent, Colors.deepPurple, Colors.deepPurple[800]],
+              colors: [
+                Colors.deepPurpleAccent,
+                Colors.deepPurple,
+                Colors.deepPurple[800]
+              ],
             ),
           ),
           padding: EdgeInsets.all(10),
@@ -113,14 +114,11 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
             mainAxisAlignment: MainAxisAlignment.start,
             verticalDirection: VerticalDirection.down,
             children: <Widget>[
-
-
 /////////
 //// Botão Meu Perfil
 /////////
 
-
-             Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   IconButton(
@@ -131,28 +129,25 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                       hoverColor: Colors.grey[600],
                       tooltip: 'Editar e Visualizar Perfil',
                       onPressed: () {
-                        Navigator.pushNamed(context, '/tela_perfil',arguments: usr);
+                        Navigator.pushNamed(context, '/tela_perfil',
+                            arguments: usr);
                       }),
                   GestureDetector(
-                    onTap:  () {
-                        Navigator.pushNamed(context, '/tela_perfil', arguments: usr);},
+                    onTap: () {
+                      Navigator.pushNamed(context, '/tela_perfil',
+                          arguments: usr);
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Meu Perfil',
                         textAlign: TextAlign.start,
                         style: TextStyle(color: Colors.white70),
-                      
                       ),
                     ),
                   ),
                 ],
               ),
-
-
-
-
-
 
 ////////
 //// Botão Sobre o Dev
@@ -172,21 +167,20 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                         sobreDev(context);
                       }),
                   GestureDetector(
-                    onTap:  () {
-                        sobreDev(context);},
+                    onTap: () {
+                      sobreDev(context);
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Sobre o desenvolvedor',
                         textAlign: TextAlign.start,
                         style: TextStyle(color: Colors.white70),
-                      
                       ),
                     ),
                   ),
                 ],
               ),
-            
 
 //////
 //Botão Sobre o App
@@ -203,12 +197,14 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                       hoverColor: Colors.grey[600],
                       tooltip: 'Informações sobre o aplicativo',
                       onPressed: () {
-                        Navigator.pushNamed(context, '/tela_sobre',arguments: usr);
+                        Navigator.pushNamed(context, '/tela_sobre',
+                            arguments: usr);
                       }),
                   GestureDetector(
-                    onTap:() {
-                        Navigator.pushNamed(context, '/tela_sobre',arguments: usr);
-                      },
+                    onTap: () {
+                      Navigator.pushNamed(context, '/tela_sobre',
+                          arguments: usr);
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
@@ -240,8 +236,8 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                       }),
                   GestureDetector(
                     onTap: () {
-                        Navigator.pop(context);
-                      },
+                      Navigator.pop(context);
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
@@ -262,7 +258,8 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
 }
 
 sobreDev(BuildContext context) {
-  String sobre = 'Oi, eu sou o Dev do Cinemateca! Me chamo Vítor, tenho 27 anos e sou de aluno da Fatec - RP. Em 2019 comecei a cursar Análise e Desenvolvimento de Sistemas e tenho aprendido bastante. Esse app foi feito com muito carinho e esforço, espero que goste!';
+  String sobre =
+      'Oi, eu sou o Dev do Cinemateca! Me chamo Vítor, tenho 27 anos e sou de aluno da Fatec - RP. Em 2019 comecei a cursar Análise e Desenvolvimento de Sistemas e tenho aprendido bastante. Esse app foi feito com muito carinho e esforço, espero que goste!';
   return showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -271,9 +268,10 @@ sobreDev(BuildContext context) {
           content: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                Text(sobre, style: TextStyle(fontSize: 14, wordSpacing: 3),),
-                
-                
+                Text(
+                  sobre,
+                  style: TextStyle(fontSize: 14, wordSpacing: 3),
+                ),
               ],
             ),
           ),
@@ -313,7 +311,6 @@ class Filme {
   String poster;
 
   Filme({this.titulo, this.ano, this.imdbID, this.tipo, this.poster});
-  
 
   factory Filme.fromJson(Map<String, dynamic> json) {
     return Filme(
@@ -348,14 +345,19 @@ class FilmeCard extends StatelessWidget {
                   width: 120,
                 )
               else if (this.filme.poster == 'N/A')
-                Icon( Icons.block, size: 120, color: Colors.grey[200],
-                  
+                Icon(
+                  Icons.block,
+                  size: 120,
+                  color: Colors.grey[200],
                 ),
             ],
           ),
           Column(
             children: [
-              Text(this.filme.titulo, style: TextStyle(fontWeight: FontWeight.bold),),
+              Text(
+                this.filme.titulo,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               Text(this.filme.ano),
               Text(this.filme.tipo),
             ],
@@ -364,39 +366,30 @@ class FilmeCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-          
-
-          IconButton(
-            icon: Icon(Icons.thumb_up, color: Colors.cyan[400]),
-            padding: EdgeInsets.all(8.0),
-            tooltip: 'Marcar como gostei',   
-            onPressed: (){
-                curtir(context,filme,usr);
-            
-             
-            }
-            ),
-
-          IconButton(
-            icon: Icon(Icons.thumb_down, color: Colors.red[900]),
-            padding: EdgeInsets.all(8.0),
-            tooltip: 'Marcar como não gostei',   
-            onPressed: (){
-              descurtir(context, filme, usr);
-            }
-            )
-          ],),
+              IconButton(
+                  icon: Icon(Icons.thumb_up, color: Colors.cyan[400]),
+                  padding: EdgeInsets.all(8.0),
+                  tooltip: 'Marcar como gostei',
+                  onPressed: () {
+                    curtir(context, filme, usr);
+                  }),
+              IconButton(
+                  icon: Icon(Icons.thumb_down, color: Colors.red[900]),
+                  padding: EdgeInsets.all(8.0),
+                  tooltip: 'Marcar como não gostei',
+                  onPressed: () {
+                    descurtir(context, filme, usr);
+                  })
+            ],
+          ),
         ],
       ),
     );
   }
 }
 
-
 class ListaFilmes extends StatelessWidget {
   final List<Filme> filmes;
-  
-  
 
   ListaFilmes({this.filmes});
 
@@ -407,15 +400,13 @@ class ListaFilmes extends StatelessWidget {
           padding: EdgeInsets.all(6),
           itemCount: this.filmes.length,
           itemBuilder: (context, index) {
-            return GestureDetector(   
-              child:Card(
-                color: Colors.grey[100],
-                child:  FilmeCard(filme: this.filmes[index]),
-              ),
-              onTap:() => Navigator.pushNamed(context, '/tela_detalhes',arguments: this.filmes[index])
-
-            );
-          
+            return GestureDetector(
+                child: Card(
+                  color: Colors.grey[100],
+                  child: FilmeCard(filme: this.filmes[index]),
+                ),
+                onTap: () => Navigator.pushNamed(context, '/tela_detalhes',
+                    arguments: this.filmes[index]));
           }),
     );
   }
@@ -432,7 +423,7 @@ Future<List<Filme>> procuraFilmes(String text) async {
     if (dados['Response'] == "True") {
       var listaFilmes =
           (dados['Search'] as List).map((e) => Filme.fromJson(e)).toList();
-    
+
       return listaFilmes;
     } else {
       throw Exception('Nenhum filme foi encontrado!');
@@ -453,132 +444,143 @@ Widget listagem(String texto) {
             snapshot.connectionState == ConnectionState.done) {
           return Expanded(child: ListaFilmes(filmes: snapshot.data));
         } else {
-          return CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color> (Colors.deepPurple[600]),);
+          return CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.deepPurple[600]),
+          );
         }
       });
 }
 
-Future<Widget> descurtir(BuildContext context, Filme filme, Usuario usuario)async{
+Future<Widget> descurtir(
+    BuildContext context, Filme filme, Usuario usuario) async {
   var db = Firestore.instance;
   final String disliked = 'disliked';
 
-  final QuerySnapshot result =
-        await db.collection(disliked).where('imdbID', isEqualTo: filme.imdbID).getDocuments();
-  final List < DocumentSnapshot > documents = result.documents;
+  final QuerySnapshot result = await db
+      .collection(disliked)
+      .where('imdbID', isEqualTo: filme.imdbID)
+      .getDocuments();
+  final List<DocumentSnapshot> documents = result.documents;
 
-  final QuerySnapshot result2 =
-        await db.collection('usuarios').where('username', isEqualTo: usuario.username).getDocuments();
-  final List < DocumentSnapshot > docUsr = result2.documents;
+  final QuerySnapshot result2 = await db
+      .collection('usuarios')
+      .where('username', isEqualTo: usuario.username)
+      .getDocuments();
+  final List<DocumentSnapshot> docUsr = result2.documents;
 
-  final QuerySnapshot result3 =
-        await db.collection('liked').where('imdbID', isEqualTo: filme.imdbID).getDocuments();
-  final List < DocumentSnapshot > docLiked = result3.documents;
+  final QuerySnapshot result3 = await db
+      .collection('liked')
+      .where('imdbID', isEqualTo: filme.imdbID)
+      .getDocuments();
+  final List<DocumentSnapshot> docLiked = result3.documents;
 
-
-   if(docLiked.isNotEmpty){
-      db.collection('liked').document(docLiked.first.documentID).delete();
+  if (docLiked.isNotEmpty) {
+    db.collection('liked').document(docLiked.first.documentID).delete();
   }
-  
-  if(documents.isEmpty){
+
+  if (documents.isEmpty) {
     db.collection(disliked).add({
-      "titulo":filme.titulo,
-      "poster":filme.poster,
-      "imdbID":filme.imdbID,
+      "titulo": filme.titulo,
+      "poster": filme.poster,
+      "imdbID": filme.imdbID,
       "user": docUsr[0].documentID
     });
     return showDialog(
-   context: context ,
-   builder: (BuildContext context){
-    return AlertDialog(
-        content:Text('${filme.titulo} foi adicionado com sucesso à sua lista de filmes que não gostou!'),
-        actions:[
-          FlatButton(onPressed:(){
-            Navigator.pop(context);
-          } , child: Text('sair'))
-        ]
-      );
-
-   }
- );
-  }
-  else{
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              content: Text(
+                  '${filme.titulo} foi adicionado com sucesso à sua lista de filmes que não gostou!'),
+              actions: [
+                FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('sair'))
+              ]);
+        });
+  } else {
     db.collection(disliked).document(documents.first.documentID).delete();
     return showDialog(
-   context: context ,
-   builder: (BuildContext context){
-    return AlertDialog(
-        content:Text('${filme.titulo} foi removido da sua lista de filmes que não gostou!'),
-        actions:[
-          FlatButton(onPressed:(){
-            Navigator.pop(context);
-          } , child: Text('sair'))
-        ]
-      );
-     }
-    );
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              content: Text(
+                  '${filme.titulo} foi removido da sua lista de filmes que não gostou!'),
+              actions: [
+                FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('sair'))
+              ]);
+        });
   }
 }
-   
-Future<Widget> curtir(BuildContext context, Filme filme, Usuario usuario)async{
+
+Future<Widget> curtir(
+    BuildContext context, Filme filme, Usuario usuario) async {
   var db = Firestore.instance;
 
   final String liked = 'liked';
-  final QuerySnapshot result =
-        await db.collection(liked).where('imdbID', isEqualTo: filme.imdbID).getDocuments();
-  final List < DocumentSnapshot > documents = result.documents;
+  final QuerySnapshot result = await db
+      .collection(liked)
+      .where('imdbID', isEqualTo: filme.imdbID)
+      .getDocuments();
+  final List<DocumentSnapshot> documents = result.documents;
 
-  final QuerySnapshot result2 =
-        await db.collection('usuarios').where('username', isEqualTo: usuario.username).getDocuments();
-  final List < DocumentSnapshot > docUsr = result2.documents;
+  final QuerySnapshot result2 = await db
+      .collection('usuarios')
+      .where('username', isEqualTo: usuario.username)
+      .getDocuments();
+  final List<DocumentSnapshot> docUsr = result2.documents;
 
-  final QuerySnapshot result3 =
-        await db.collection('disliked').where('imdbID', isEqualTo: filme.imdbID).getDocuments();
-  final List < DocumentSnapshot > docDisliked = result3.documents;
+  final QuerySnapshot result3 = await db
+      .collection('disliked')
+      .where('imdbID', isEqualTo: filme.imdbID)
+      .getDocuments();
+  final List<DocumentSnapshot> docDisliked = result3.documents;
 
-  if(docDisliked.isNotEmpty){
-      db.collection('disliked').document(docDisliked.first.documentID).delete();
+  if (docDisliked.isNotEmpty) {
+    db.collection('disliked').document(docDisliked.first.documentID).delete();
   }
 
-  
-  if(documents.isEmpty){
+  if (documents.isEmpty) {
     db.collection(liked).add({
-      "titulo":filme.titulo,
-      "poster":filme.poster,
-      "imdbID":filme.imdbID,
+      "titulo": filme.titulo,
+      "poster": filme.poster,
+      "imdbID": filme.imdbID,
       "user": docUsr[0].documentID
     });
     return showDialog(
-   context: context ,
-   builder: (BuildContext context){
-    return AlertDialog(
-        content:Text('${filme.titulo} foi adicionado com sucesso à sua lista de filmes que gostou!'),
-        actions:[
-          FlatButton(onPressed:(){
-            Navigator.pop(context);
-          } , child: Text('sair'))
-        ]
-      );
-
-   }
- );
-  }
-  else{
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              content: Text(
+                  '${filme.titulo} foi adicionado com sucesso à sua lista de filmes que gostou!'),
+              actions: [
+                FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('sair'))
+              ]);
+        });
+  } else {
     db.collection(liked).document(documents.first.documentID).delete();
     return showDialog(
-   context: context ,
-   builder: (BuildContext context){
-    return AlertDialog(
-        content:Text('${filme.titulo} foi removido da sua lista de filmes que gostou!'),
-        actions:[
-          FlatButton(onPressed:(){
-            Navigator.pop(context);
-          } , child: Text('sair'))
-        ]
-      );
-     }
-    );
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              content: Text(
+                  '${filme.titulo} foi removido da sua lista de filmes que gostou!'),
+              actions: [
+                FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('sair'))
+              ]);
+        });
   }
 }
-
-
-

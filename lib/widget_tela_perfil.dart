@@ -140,7 +140,6 @@ Widget renderizaCurtir(Usuario usr) {
       });
 }
 
-
 Future<List> pegaDescurtir(Usuario usr) async {
   var db = Firestore.instance;
   final String disliked = 'disliked';
