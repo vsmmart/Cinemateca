@@ -73,6 +73,7 @@ TextEditingController txtPassword = TextEditingController();
 }
 
 Future<Widget> checagem(BuildContext context, String usrname, String senha) async {
+  
   var db = Firestore.instance;
   var flag = '';
   final String colecao = 'usuarios';
@@ -80,13 +81,17 @@ Future<Widget> checagem(BuildContext context, String usrname, String senha) asyn
   
   final QuerySnapshot result =
         await db.collection(colecao).where('username', isEqualTo: usrname).getDocuments();
-    final List < DocumentSnapshot > documents = result.documents;
   
+        
+    final List < DocumentSnapshot > documents = result.documents;
+    
   if(documents.isEmpty){
     db.collection(colecao).add({
                       "username":usrname,
-                      "password":senha
+                      "password":senha,
+                      
                     });
+    
    flag = 'Usuário Cadastrado com Sucesso!';
                 
   }

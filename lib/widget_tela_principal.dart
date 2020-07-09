@@ -312,6 +312,7 @@ class Filme {
   String poster;
 
   Filme({this.titulo, this.ano, this.imdbID, this.tipo, this.poster});
+  
 
   factory Filme.fromJson(Map<String, dynamic> json) {
     return Filme(
@@ -421,7 +422,7 @@ class ListaFilmes extends StatelessWidget {
 
 Future<List<Filme>> procuraFilmes(String text) async {
   String urlBusca = 'http://www.omdbapi.com/?s=';
-  String urlKey = '&apikey=82b14fa0';
+  String urlKey = '&apikey=82b14fa0&type=movie';
 
   var resposta = await http.get('$urlBusca$text$urlKey');
   if (resposta.statusCode == 200) {
@@ -451,7 +452,7 @@ Widget listagem(String texto) {
             snapshot.connectionState == ConnectionState.done) {
           return Expanded(child: ListaFilmes(filmes: snapshot.data));
         } else {
-          return CircularProgressIndicator();
+          return CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color> (Colors.deepPurple[600]),);
         }
       });
 }
